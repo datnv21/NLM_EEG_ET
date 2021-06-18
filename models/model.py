@@ -16,6 +16,5 @@ class NLMBasic:
         model.add(Embedding(self.vocab, self.character_embedding, input_length=30, trainable=True))
         model.add(GRU(self.n_timesteps, recurrent_dropout=0.1, dropout=0.1))
         model.add(Dense(self.vocab, activation="softmax"))
-        # print(model.summary)
 
         return model

@@ -4,6 +4,7 @@ sys.path.append("utils")
 import json
 
 from constant import VN_RE, SEQUENCE_LENGTH
+from sklearn.utils import shuffle
 
 
 TEXT_PATH = "text_timestamp.json"
@@ -15,6 +16,7 @@ def create_corpus():
         f.close()
 
     text = data["text"]
+    # text = shuffle(text, random_state=42)
     corpus = " ".join(text)
     corpus = corpus.lower()
     

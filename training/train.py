@@ -30,7 +30,7 @@ def main():
     nlm_basic = NLMBasic(vocab_size)
     model = nlm_basic.build_model()
     model.compile(loss='categorical_crossentropy', metrics=['acc'], optimizer='adam')
-    model.fit(X_train, y_train, epochs=100, verbose=2, validation_data=(X_val, y_val))
+    model.fit(X_train, y_train, epochs=70, verbose=2, validation_data=(X_val, y_val))
     model.save(os.path.join(checkpoint_dir, "model.h5"))
 
     return 1
