@@ -1,2 +1,4 @@
 DataVIN*
 .ipynb_checkpoints
+utils/__pycache__/
+data/__pycache__/
