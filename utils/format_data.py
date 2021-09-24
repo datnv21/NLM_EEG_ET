@@ -4,7 +4,7 @@ import pandas as pd
 
 path_list_dir = []
 path_ET = []
-directory = '/Users/sonnguyen/Desktop/EEG/DataEEG'
+directory = './EEG/DataEEG'
 list_dir = os.listdir(directory)
 
 list_dir.remove('.DS_Store')
