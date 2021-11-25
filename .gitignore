@@ -2,3 +2,7 @@ DataVIN*
 .ipynb_checkpoints
 utils/__pycache__/
 data/__pycache__/
+hbd/__pycache__/
+models/__pycache__
+.DS_Store
+hbd/utils/__pycache__

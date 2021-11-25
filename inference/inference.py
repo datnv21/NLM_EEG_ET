@@ -7,7 +7,7 @@ sys.path.append("data")
 from model import NLMBasic
 from preprocess import prepare
 from keras.preprocessing.sequence import pad_sequences
-from constant import SEQUENCE_LENGTH
+from constant import SEQUENCE_LENGTH, CHR_EMBEDDINGS
 import numpy as np
 
 
@@ -33,13 +33,13 @@ def generate_seq(model, mapping, seq_length, seed_text, n_chars):
 
 
 def inference():
-    sequences_encoded, mapping = prepare()
+    sequences_encoded, mapping, labels_encoded = prepare(use_et=False)
     vocab_size = len(mapping)
-    nlm_basic = NLMBasic(vocab_size)
+    nlm_basic = NLMBasic(vocab_size, input_length=SEQUENCE_LENGTH, character_embedding=CHR_EMBEDDINGS)
     model = nlm_basic.build_model()
     model.load_weights(model_weight, by_name=True, skip_mismatch=True)
 
-    seed_text = "tôi m"
+    seed_text = "nâng ch"
     result = generate_seq(model, mapping, SEQUENCE_LENGTH, seed_text, len(mapping))
     print(result)
 
