@@ -14,11 +14,12 @@ TEXT_TIMESTAMP_JSON = "text_timestamp.json"
 
 
 def main():
-    et_text_data = {"data": [], "timestamp": []}
+    # et_text_data = {"data": [], "timestamp": []}
     et_text = {"text": [], "timestamp": []}
 
     for sub_dir in os.listdir(DATA_DIR):
-        if "HMI" not in sub_dir: continue
+        # if "HMI" not in sub_dir: continue
+        if sub_dir == ".DS_Store": continue
         sub_path = os.path.join(DATA_DIR, sub_dir)
 
         for sample in os.listdir(sub_path):
@@ -29,20 +30,19 @@ def main():
                 with open(data_file, "r") as f:
                     csv_dict_reader = DictReader(f)
                     for idx, row in enumerate(csv_dict_reader):
-                        # et_text_data["data"].append(row['Data'])
-                        # et_text_data["timestamp"].append(row['TimeStamp'])
-
-                    # data_length = len(et_text_data["data"])
-                    
-                    # for i in range(data_length):
-                        timestamp = row["TimeStamp"]
-                        text = row["Data"]
-                        text = re.sub(VN_RE, '', text)
-                        text = text.split(':')
-                        sentence = text[-1].strip()
+                        if len(row.keys()) == 2:
+                            timestamp = row["TimeStamp"]
+                            text = row["Data"]
+                            text = re.sub(VN_RE, '', text)
+                            text = text.split(':')
+                            sentence = text[-1].strip()
+                        else:
+                            timestamp = row["TimeStamp"]
+                            text = row["character typing"]
+                            sentence = text.strip()
                         
                         if len(sentence.split(" ")) > 1:
-                            if sentence not in et_text["text"]:
+                            if sentence not in et_text["text"] and len(sentence.split(" ")[-1])>=2:
                                 et_text["text"].append(sentence)
                                 et_text["timestamp"].append(timestamp)
             
